@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 7636675666343710103}
   - component: {fileID: 5265376920804412694}
   m_Layer: 6
-  m_Name: SmallDoc
+  m_Name: USBs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -595,6 +595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff1e2fc92bdf57f41abb8a1589da881a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 5
+  points: 10
   audioClip: {fileID: 8300000, guid: 6e2a2c6c205135140a6c22b6c3a01053, type: 3}
   textDisplay: {fileID: 8894226375034697178}

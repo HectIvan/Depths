@@ -18,7 +18,12 @@ public class ItemSpawner : MonoBehaviour
     {
       int type = Random.Range(0, prefabs.Count - 1);
       GameObject instance = prefabs[type];
-      Instantiate(instance, transform.position, transform.rotation, transform);
+      Vector3 rotVec = transform.localRotation.eulerAngles;
+      rotVec.y = Random.Range(0, 360);
+      Quaternion newRot = transform.localRotation;
+      newRot.eulerAngles = rotVec;
+      Instantiate(instance, transform.position, newRot, transform);
+      print(newRot);
     }
   }
 
