@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 19a5951015ff18e47a00d447e2594529
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_largeCrates: {fileID: 8042215980389610475, guid: 8ea23519a18c3d240a1e725d4d9c3a6d, type: 3}
+  - m_shelfPrefab: {fileID: 4046266063711599644, guid: f6814a7c67f3ba74fb3fed45f4d4c670, type: 3}
+  - m_lockerPrefab: {fileID: 8556784082913814254, guid: e2c665f509c14214a94e2eea89594bb4, type: 3}
+  - m_wideDrawer: {fileID: 773330335130524571, guid: d14fb63cd3d595348abf40eff83edd5d, type: 3}
+  - m_largeDrawer: {fileID: 1251609186969610187, guid: ca0c63c684ee7cc4ba6db7e5f12d2f65, type: 3}
+  - m_singleCrate: {fileID: 7498326979252467861, guid: 5c3bffbb6f587474eb86adf78114b407, type: 3}
+  - m_drawerPrefab: {fileID: 4989053692751722965, guid: b2e2e4eabbdcc7d4ca4abed46dfab2e5, type: 3}
+  - m_smallDrawerPrefab: {fileID: 8924173305473737149, guid: 7539495ebd43226439d2dbc16eb49284, type: 3}
+  - m_nextSpawnPoint: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
