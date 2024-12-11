@@ -16,7 +16,7 @@ public class ItemSpawner : MonoBehaviour
 
     if (Random.Range(0, 100) <= spawnChance)
     {
-      int type = Random.Range(0, prefabs.Count - 1);
+      int type = Random.Range(0, prefabs.Count);
       GameObject instance = prefabs[type];
       Vector3 rotVec = transform.localRotation.eulerAngles;
       rotVec.y = Random.Range(0, 360);
