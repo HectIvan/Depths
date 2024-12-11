@@ -26,9 +26,6 @@ public class Locker : MonoBehaviour
   void
   Update()
   {
-    // print(m_leftRotIni);
-    // print(m_leftRotEnd);
-    // print(m_left.transform.rotation);
     if (m_leftHandle.GetComponent<interactable>().m_interacted ||
         m_rightHandle.GetComponent<interactable>().m_interacted)
     {

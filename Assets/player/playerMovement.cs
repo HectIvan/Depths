@@ -52,45 +52,17 @@ public class playerMovement : MonoBehaviour
     // if the re was a collision and there was an input
     if (Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out hit, m_interDistance, m_interactable))
     {
+      // check if the player is staring at an interactable
       var check = hit.collider.gameObject.GetComponent<interactable>();
       if (check != null)
       {
         check.m_showBillboard = true;
-      }
-      var doc = hit.collider.gameObject.GetComponent<Document>();
-      if (doc != null)
-      {
-        doc.m_show = true;
-      }
-      if (UnityEngine.Input.GetKeyDown(m_interact))
-      {
-        // if the item is an interactable
-        var interactable = hit.collider.gameObject.GetComponent<interactable>();
-        if (interactable != null)
+        // if it is interacted with
+        if (UnityEngine.Input.GetKeyDown(m_interact))
         {
-          // if its a locker
-          var locker = interactable.transform.parent.gameObject.transform.parent.GetComponent<Locker>();
-          if (locker != null)
-          {
-            locker.GetComponent<Locker>().m_elapsedTime = 0;
-          }
-          // if its a drawer
-          var drawer = interactable.transform.parent.gameObject.GetComponent<drawer>();
-          if (drawer != null)
-          {
-            drawer.GetComponent<drawer>().m_elapsedTime = 0;
-          }
-         
-          interactable.m_interacted = !hit.collider.gameObject.GetComponent<interactable>().m_interacted;
-          return;
+          // set as interacted with
+          check.m_interacted = !check.m_interacted;
         }
-        // if item is a document
-        var document = hit.collider.gameObject.GetComponent<Document>();
-        if (document != null)
-        {
-          document.pickUp();
-        }
-
       }
     }
   }

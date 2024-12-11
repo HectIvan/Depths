@@ -25,5 +25,4 @@ public class ScoreManager : MonoBehaviour
 
   public Text m_scoreText;
   private GameObject m_player;
-  private float m_score = 0;
 }

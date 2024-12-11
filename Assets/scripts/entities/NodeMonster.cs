@@ -277,7 +277,6 @@ public class NodeMonster : MonoBehaviour
           allChecked = false;
         }
       }
-      // print(allChecked);
       // if all have been visited, jump to next room
       if (allChecked) { m_currentRoom -= 1; }
       Mathf.Clamp(m_currentRoom, 0, m_navRooms.Count);

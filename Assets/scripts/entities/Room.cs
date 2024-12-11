@@ -147,7 +147,7 @@ public class Room : MonoBehaviour
     {
       int type = Random.Range(0, _prefabs.Count);
       GameObject instance = _prefabs[type]; // large crates will be default
-      instance.transform.localScale = new UnityEngine.Vector3(0.01f, 0.01f, 0.01f);
+      // instance.transform.localScale = new UnityEngine.Vector3(0.01f, 0.01f, 0.01f);
       Instantiate(instance, m_children[0].transform.position, m_children[0].transform.rotation, this.transform);
     }
     m_children.Remove(m_children[0]);
