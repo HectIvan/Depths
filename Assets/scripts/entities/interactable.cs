@@ -21,8 +21,10 @@ public class interactable : MonoBehaviour
   void
   Update()
   {
-    m_interactIcon.SetActive(m_showBillboard);
-    m_interactIcon.transform.LookAt(m_player.transform.GetChild(0).transform.position);
+    if (m_interactIcon) {
+      m_interactIcon.SetActive(m_showBillboard);
+      m_interactIcon.transform.LookAt(m_player.transform.GetChild(0).transform.position);
+    }
     m_showBillboard = false;
   }
 
