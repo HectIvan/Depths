@@ -16,6 +16,21 @@ public class Inventory : MonoBehaviour
   void
   Update()
   {
+    UserInput();
+  }
+
+  void
+  UserInput()
+  {
+    // Check for number keys (0-9)
+    for (Int16 i = 0; i <= 9; i++)
+    {
+      if (Input.GetKeyDown(i.ToString()))
+      {
+        selected = i;
+        print(selected);
+      }
+    }
   }
 
   /// <summary>
@@ -24,7 +39,6 @@ public class Inventory : MonoBehaviour
   public void
   InsertSlot()
   {
-    print(slots.Count);
     // instantiate a slot prefab
     var slot = Instantiate(slotPrefab,
                            inventoryPoint.transform.position,
@@ -73,5 +87,5 @@ public class Inventory : MonoBehaviour
   public GameObject inventoryPoint;
   public float slotSpacing;
   private List<GameObject> slots;
-  private Int32 selected;
+  private Int16 selected;
 }

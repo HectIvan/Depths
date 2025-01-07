@@ -23,7 +23,6 @@ public class ItemSpawner : MonoBehaviour
       Quaternion newRot = transform.localRotation;
       newRot.eulerAngles = rotVec;
       Instantiate(instance, transform.position, newRot, transform);
-      print(newRot);
     }
   }
 

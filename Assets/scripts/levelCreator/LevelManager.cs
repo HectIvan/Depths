@@ -29,8 +29,7 @@ public class LevelManager : MonoBehaviour
   void
   Update()
   {
-    if (m_optimizeRooms)
-    {
+    if (m_optimizeRooms) {
       Optimization();
     }
     PlayAmbienceSounds();
@@ -48,19 +47,19 @@ public class LevelManager : MonoBehaviour
   {
     int roomNumber;
     int currentPlayerRoom = m_player.GetComponent<playerMovement>().m_currentRoom;
-    foreach (GameObject room in m_rooms)
-    {
+    foreach (GameObject room in m_rooms) {
       roomNumber = room.transform.GetChild(0).GetComponent<Room>().m_number;
       // if the current room is 10 layers below or above the current player room
       if (roomNumber < currentPlayerRoom - m_renderTolerance ||
-          roomNumber > currentPlayerRoom + m_renderTolerance) 
-      {
+          roomNumber > currentPlayerRoom + 1) {
         SetRoomState(room, false);
       }
-      else
-      {
+      else {
         SetRoomState(room, true);
       }
+    }
+    if (currentPlayerRoom > m_renderTolerance) {
+      startRoom.SetActive(false);
     }
   }
 
@@ -68,8 +67,7 @@ public class LevelManager : MonoBehaviour
   SetRoomState(GameObject _room, bool _state)
   {
     _room.gameObject.SetActive(_state);
-    for (int i = 0; i < _room.transform.childCount; ++i)
-    {
+    for (int i = 0; i < _room.transform.childCount; ++i) {
       _room.transform.GetChild(i).gameObject.SetActive(_state);
     }
   }
@@ -86,8 +84,7 @@ public class LevelManager : MonoBehaviour
 
     _prefabs = new List<GameObject>();
 
-    foreach (GameObject prefab in loadedPrefabs)
-    {
+    foreach (GameObject prefab in loadedPrefabs) {
       _prefabs.Add(prefab);
     }
   }
@@ -108,29 +105,27 @@ public class LevelManager : MonoBehaviour
     // m_angler.GetComponent<angler>().setNavRoomNodes(module.transform.GetChild(0).gameObject);
 
     // for each instance in the remaining room count
-    for (int i = 1; i < m_roomCount; ++i)
-    {
+    for (int i = 1; i < m_roomCount; ++i) {
       int type = UnityEngine.Random.Range(0, 100);
       
-      if (type < m_epicRoomChance) // if the chance is that of an epic room
-      {
+      // if the chance is that of an epic room
+      if (type < m_epicRoomChance) {
         TypeRoomInstantiate(ref m_epicRoomsPrefabs, ref module, i);
       }
-      else if (type < m_rareRoomChance) // if the chance is that of a rare room
-      {
+      // if the chance is that of a rare room
+      else if (type < m_rareRoomChance) {
         TypeRoomInstantiate(ref m_rareRoomsPrefabs, ref module, i);
       }
-      else if (type < m_normalRoomChance) // if the chance is that of a normal room
-      {
+      // if the chance is that of a normal room
+      else if (type < m_normalRoomChance) {
         TypeRoomInstantiate(ref m_roomPrefabs, ref module, i);
       }
-      else // if for some reason it doesnt fit any chance, create a normal room
-      {
+      // if for some reason it doesnt fit any chance, create a normal room
+      else {
         TypeRoomInstantiate(ref m_roomPrefabs, ref module, i);
       }
     }
-    for (int i = 0; i < m_nodeMonsters.Length; ++i)
-    {
+    for (int i = 0; i < m_nodeMonsters.Length; ++i) {
       m_nodeMonsters[i].GetComponent<NodeMonster>().Clear();
       SetNodeMonsterRooms(ref m_nodeMonsters[i]);
     }
@@ -145,8 +140,8 @@ public class LevelManager : MonoBehaviour
   void
   TypeRoomInstantiate(ref List<GameObject> _prefabs, ref GameObject _module, int _number)
   {
-    if (_prefabs.Count > 0) // if the prefab list is not empty
-    {
+    // if the prefab list is not empty
+    if (_prefabs.Count > 0) {
       int randomIndex = UnityEngine.Random.Range(0, _prefabs.Count); // choose random room from prefabs
       GameObject nextSpawn = _module.transform.GetChild(0).GetComponent<Room>().m_nextSpawnPoint; // get spawn point
       _module = Instantiate(_prefabs[randomIndex], nextSpawn.transform.position, nextSpawn.transform.rotation); // instantiate the new room
@@ -160,8 +155,7 @@ public class LevelManager : MonoBehaviour
   SetNodeMonsterRooms(ref GameObject _monster)
   {
     _monster.GetComponent<NodeMonster>().Clear();
-    foreach (GameObject room in m_rooms)
-    {
+    foreach (GameObject room in m_rooms) {
       _monster.GetComponent<NodeMonster>().setNavRoomNodes(room);
     }
     // _monster.GetComponent<NodeMonster>().Init();
@@ -170,13 +164,11 @@ public class LevelManager : MonoBehaviour
   void
   PlayAmbienceSounds()
   {
-    if (m_rSoundTimer == 0)
-    {
+    if (m_rSoundTimer == 0) {
       m_rSoundTimer = UnityEngine.Random.Range(1, m_maxSoundTimerPossible);
     }
     m_soundTime += Time.deltaTime;
-    if (m_soundTime > m_rSoundTimer)
-    {
+    if (m_soundTime > m_rSoundTimer) {
       m_rSoundTimer = 0;
       m_soundTime = 0;
       SFXManager.m_instance.PlayRandomParentedSFXClips(m_randomSounds, m_player.transform, 1.0f, m_player.transform);
@@ -187,24 +179,20 @@ public class LevelManager : MonoBehaviour
   AttackTimer()
   {
     // check if attack Time has expired (an attack is initialized)
-    if (m_player.GetComponent<playerMovement>().m_currentRoom > 0)
-    {
+    if (m_player.GetComponent<playerMovement>().m_currentRoom > 0) {
       m_attackTime -= Time.deltaTime;
     }
-    if (m_attackTime < 0)
-    {
+    if (m_attackTime < 0) {
       m_attackTime = m_attackTimer;
       // select a random chance
       int chance = UnityEngine.Random.Range(0, m_totalChane);
       // for each entity in the list
       bool spawnedEntity = false;
-      for (int i = 0; i < m_nodeMonsters.Length; ++i)
-      {
+      for (int i = 0; i < m_nodeMonsters.Length; ++i) {
         // get their spawn chance
         int monsterChance = m_nodeMonsters[i].GetComponent<NodeMonster>().m_spawnChance;
         // check if the spawn chance is equal or lower than the selected monster
-        if (chance <= m_spawnChances[i])
-        {
+        if (chance <= m_spawnChances[i]) {
           ActivateEntity(ref m_nodeMonsters[i]);
           FlickerRooms();
           spawnedEntity = true;
@@ -212,8 +200,7 @@ public class LevelManager : MonoBehaviour
         }
       }
       // if no entity spawned spawn the most common
-      if (!spawnedEntity)
-      {
+      if (!spawnedEntity) {
         ActivateEntity(ref m_nodeMonsters[m_nodeMonsters.Length - 1]);
         FlickerRooms();
       }
@@ -232,11 +219,11 @@ public class LevelManager : MonoBehaviour
   {
     foreach (GameObject _room in m_rooms)
     {
-      SFXManager.m_instance.PlayParentedSFXClip(m_flickerSound, _room.transform, 1.0f, _room.transform);
-      if (_room.transform.GetChild(0).GetComponent<Room>().m_number <= m_player.GetComponent<playerMovement>().m_currentRoom)
-      {
-        for (int i = 0; i < _room.transform.GetChild(0).GetComponent<Room>().m_lights.Count; ++i)
-        {
+      if (_room.gameObject.activeSelf) {
+        SFXManager.m_instance.PlayParentedSFXClip(m_flickerSound, _room.transform, 1.0f, _room.transform);
+      }
+      if (_room.transform.GetChild(0).GetComponent<Room>().m_number <= m_player.GetComponent<playerMovement>().m_currentRoom) {
+        for (int i = 0; i < _room.transform.GetChild(0).GetComponent<Room>().m_lights.Count; ++i) {
           _room.transform.GetChild(0).GetComponent<Room>().m_lights[i].GetComponent<LightSource>().m_epileptic = m_epileptic;
           _room.transform.GetChild(0).GetComponent<Room>().m_lights[i].GetComponent<LightSource>().m_flickering = true;
         }
@@ -293,6 +280,7 @@ public class LevelManager : MonoBehaviour
   [Header("Room optimization")]
   public int m_renderTolerance;
   public bool m_optimizeRooms;
+  public GameObject startRoom;
 
   [Header("Sounds")]
   [SerializeField] private AudioClip m_ambienceSound;

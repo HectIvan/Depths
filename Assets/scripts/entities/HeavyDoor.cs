@@ -138,7 +138,6 @@ public class HeavyDoor : MonoBehaviour
     if (_rate >= 0) { _rate = 1.0f; }
     // rotate the valve
     Quaternion rot = _valve.transform.localRotation;
-    print(rot);
     float newY = rot.y + m_rotSpeed * m_playSpeed * Time.deltaTime * m_playSpeed * _rate;
     _valve.transform.localRotation = Quaternion.Euler(rot.x, newY, rot.y);
   }
